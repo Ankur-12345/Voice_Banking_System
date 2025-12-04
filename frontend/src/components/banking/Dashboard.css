@@ -348,3 +348,50 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Add to existing Dashboard.css */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.section-header .refresh-btn {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.section-header .refresh-btn:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.transaction-recipient {
+  color: #888;
+  font-size: 12px;
+  margin: 3px 0 0 0;
+  font-family: 'Courier New', monospace;
+}
+
+/* Highlight for voice command results */
+.transactions-section.voice-results {
+  border: 2px solid #667eea;
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.transactions-section.voice-results h2 {
+  color: #667eea;
+}

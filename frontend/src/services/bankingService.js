@@ -29,5 +29,10 @@ export const bankingService = {
   validateAccount: async (accountNumber) => {
     const response = await api.get(`/api/banking/validate-account/${accountNumber}`);
     return response.data;
+  },
+
+  getAllUsers: async () => {
+    const response = await api.get('/api/banking/all-users');
+    return response.data;
   }
 };

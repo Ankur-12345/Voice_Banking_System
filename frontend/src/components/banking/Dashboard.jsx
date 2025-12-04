@@ -16,6 +16,7 @@ const Dashboard = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
+  const [showVoiceTransactions, setShowVoiceTransactions] = useState(false); // NEW
   const navigate = useNavigate();
 
   // Wrap fetchBalance in useCallback
@@ -78,23 +79,42 @@ const Dashboard = () => {
         setBalance(result.data.balance);
         setAccountNumber(result.data.account_number);
         setMessage(`✅ ${result.message}`);
+        setShowVoiceTransactions(false);
       }
     } else if (result.action === 'transfer') {
       if (result.data?.sender?.new_balance !== undefined) {
         setBalance(result.data.sender.new_balance);
         setMessage(`✅ ${result.message}`);
         fetchTransactions(); // Refresh transactions
+        setShowVoiceTransactions(false);
+        // Auto switch to overview tab to see updated transactions
+        setActiveTab('overview');
       }
     } else if (result.action === 'transaction_history') {
       if (result.data?.transactions) {
+        // Convert the transaction data to match our format
+        const formattedTransactions = result.data.transactions.map(t => ({
+          id: t.id,
+          transaction_type: t.type,
+          amount: t.amount,
+          description: t.description,
+          timestamp: t.timestamp,
+          recipient_account: t.recipient_account || null
+        }));
+        
+        setTransactions(formattedTransactions);
         setMessage(`✅ ${result.message}`);
-        fetchTransactions(); // Refresh transactions
+        setShowVoiceTransactions(true);
+        
+        // Auto switch to overview tab to show transactions
+        setActiveTab('overview');
       }
-    } else if (result.action === 'unknown') {
+    } else if (result.action === 'unknown' || result.action === 'transfer_failed') {
       setError(`❌ ${result.message}`);
       if (result.suggestions) {
         setError(prev => prev + '\n\nSuggestions: ' + result.suggestions.join(', '));
       }
+      setShowVoiceTransactions(false);
     }
     
     // Clear messages after 5 seconds
@@ -191,7 +211,21 @@ const Dashboard = () => {
 
             {/* Recent Transactions */}
             <section className="transactions-section">
-              <h2>Recent Transactions</h2>
+              <div className="section-header">
+                <h2>{showVoiceTransactions ? 'Voice Command Results' : 'Recent Transactions'}</h2>
+                {showVoiceTransactions && (
+                  <button 
+                    className="refresh-btn"
+                    onClick={() => {
+                      fetchTransactions();
+                      setShowVoiceTransactions(false);
+                    }}
+                  >
+                    🔄 Refresh All
+                  </button>
+                )}
+              </div>
+              
               {transactions.length === 0 ? (
                 <div className="no-transactions">
                   <p>No transactions yet</p>
@@ -199,7 +233,7 @@ const Dashboard = () => {
                 </div>
               ) : (
                 <div className="transactions-list">
-                  {transactions.slice(0, 10).map((transaction) => (
+                  {transactions.map((transaction) => (
                     <div key={transaction.id} className="transaction-item">
                       <div className="transaction-icon">
                         {transaction.transaction_type === 'credit' ? '📥' : '📤'}
@@ -210,6 +244,11 @@ const Dashboard = () => {
                           {new Date(transaction.timestamp).toLocaleDateString()} at{' '}
                           {new Date(transaction.timestamp).toLocaleTimeString()}
                         </p>
+                        {transaction.recipient_account && (
+                          <p className="transaction-recipient">
+                            To: {transaction.recipient_account}
+                          </p>
+                        )}
                       </div>
                       <div className={`transaction-amount ${transaction.transaction_type}`}>
                         {transaction.transaction_type === 'credit' ? '+' : '-'}$
