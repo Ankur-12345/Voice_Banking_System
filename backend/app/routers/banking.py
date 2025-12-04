@@ -237,3 +237,77 @@ def get_account_info(
         "balance": current_user.balance,
         "account_created": current_user.created_at
     }
+
+@router.get("/search-accounts/{query}")
+def search_accounts(
+    query: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Search for accounts by username or account number
+    """
+    banking_service = BankingService(db)
+    
+    try:
+        # Search by username or account number
+        users = db.query(User).filter(
+            (User.username.ilike(f"%{query}%")) |
+            (User.account_number.ilike(f"%{query}%"))
+        ).filter(
+            User.id != current_user.id  # Exclude current user
+        ).limit(10).all()
+        
+        results = [
+            {
+                "username": user.username,
+                "full_name": user.full_name,
+                "account_number": user.account_number
+            }
+            for user in users
+        ]
+        
+        return {
+            "query": query,
+            "results": results,
+            "count": len(results)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/validate-account/{account_number}")
+def validate_account(
+    account_number: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Validate if an account number exists and get account details
+    """
+    banking_service = BankingService(db)
+    
+    try:
+        recipient = banking_service.get_user_by_account(account_number)
+        
+        if not recipient:
+            return {
+                "valid": False,
+                "message": "Account not found"
+            }
+        
+        if recipient.id == current_user.id:
+            return {
+                "valid": False,
+                "message": "Cannot transfer to your own account"
+            }
+        
+        return {
+            "valid": True,
+            "account_number": recipient.account_number,
+            "username": recipient.username,
+            "full_name": recipient.full_name,
+            "message": "Account found"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

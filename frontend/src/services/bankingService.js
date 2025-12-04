@@ -14,5 +14,20 @@ export const bankingService = {
   getTransactions: async () => {
     const response = await api.get('/api/banking/transactions');
     return response.data;
+  },
+
+  getRecentRecipients: async () => {
+    const response = await api.get('/api/banking/recent-recipients');
+    return response.data;
+  },
+
+  searchAccounts: async (query) => {
+    const response = await api.get(`/api/banking/search-accounts/${encodeURIComponent(query)}`);
+    return response.data;
+  },
+
+  validateAccount: async (accountNumber) => {
+    const response = await api.get(`/api/banking/validate-account/${accountNumber}`);
+    return response.data;
   }
 };
