@@ -47,7 +47,7 @@ const Login = () => {
                 type="text"
                 id="username"
                 name="username"
-                placeholder="Enter your username"
+                placeholder="       Enter your username"
                 value={formData.username}
                 onChange={handleChange}
                 required
@@ -64,7 +64,7 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                placeholder="Enter your password"
+                placeholder="       Enter your password"
                 value={formData.password}
                 onChange={handleChange}
                 required

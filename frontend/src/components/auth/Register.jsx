@@ -55,7 +55,7 @@ const Register = () => {
                 type="text"
                 id="full_name"
                 name="full_name"
-                placeholder="John Doe"
+                placeholder="       John Doe"
                 value={formData.full_name}
                 onChange={handleChange}
                 disabled={loading}
@@ -71,7 +71,7 @@ const Register = () => {
                 type="text"
                 id="username"
                 name="username"
-                placeholder="johndoe"
+                placeholder="       johndoe"
                 value={formData.username}
                 onChange={handleChange}
                 required
@@ -88,7 +88,7 @@ const Register = () => {
                 type="email"
                 id="email"
                 name="email"
-                placeholder="john@example.com"
+                placeholder="       john@example.com"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -105,7 +105,7 @@ const Register = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                placeholder="Enter strong password"
+                placeholder="       Enter strong password"
                 value={formData.password}
                 onChange={handleChange}
                 required
