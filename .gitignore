@@ -4,3 +4,5 @@ package-lock.json
 .env
 banking.db
 voice_banking.db
+__pycache__
+.sqlite3
