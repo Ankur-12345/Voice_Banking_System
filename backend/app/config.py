@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./voice_banking.db"
     
     # Groq AI Configuration (FREE!)
-    GROQ_API_KEY: str = "REMOVED_API_KEY"
+    GROQ_API_KEY: str = ""  # Set in .env file
     GROQ_MODEL: str = "llama-3.3-70b-versatile"  # Updated to latest model
     
     # SMTP Settings (optional, for email features)
