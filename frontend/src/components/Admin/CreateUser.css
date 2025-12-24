@@ -1,0 +1,356 @@
+.create-user-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.create-user-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.create-user-card h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.quick-create-section,
+.manual-create-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.quick-create-section h3,
+.manual-create-section h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.quick-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.quick-btn {
+  padding: 10px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.quick-btn:hover:not(:disabled) {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.quick-btn:disabled {
+  background: #4caf50;
+  cursor: default;
+}
+
+.create-all-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.create-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.manual-create-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manual-create-section input {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.manual-create-section input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.manual-create-section button[type="submit"] {
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.manual-create-section button[type="submit"]:hover {
+  background: #5568d3;
+}
+
+.error-message {
+  padding: 15px;
+  background: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #c62828;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.created-users-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #e8f5e9;
+  border-radius: 10px;
+}
+
+.created-users-section h3 {
+  margin-bottom: 20px;
+  color: #2e7d32;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-info strong {
+  color: #333;
+  font-size: 16px;
+}
+
+.user-email {
+  color: #666;
+  font-size: 14px;
+}
+
+.account-number {
+  background: #f5f5f5;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #333;
+}
+
+.balance {
+  color: #4caf50;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.copy-btn {
+  padding: 8px 15px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.copy-btn:hover {
+  background: #5568d3;
+}
+
+.instructions {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  border-radius: 8px;
+}
+
+.instructions h4 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.instructions ol {
+  margin-left: 20px;
+}
+
+.instructions li {
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.instructions ul {
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+/* Add to existing CSS */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.loading-state .spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e0e0e0;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  padding: 15px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #4caf50;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.quick-btn.created {
+  background: #4caf50;
+  cursor: default;
+  opacity: 0.7;
+}
+
+.all-users-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  color: #333;
+  margin: 0;
+}
+
+.refresh-btn {
+  padding: 8px 16px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.refresh-btn:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.no-users {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.no-users p {
+  margin: 5px 0;
+}
+
+.no-users .sub-text {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.user-full-name {
+  display: block;
+  color: #888;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.user-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.copy-btn.secondary {
+  background: #764ba2;
+}
+
+.copy-btn.secondary:hover {
+  background: #653a8a;
+}
+
+.instructions code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  color: #d32f2f;
+}
